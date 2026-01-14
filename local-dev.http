@@ -1,0 +1,24 @@
+### Get Dashboard Stats (Total Companies + Top Commodities + Monthly Volume)
+GET http://localhost:3000/api/companies/stats
+Accept: application/json
+
+### Get Company List (Paginated)
+GET http://localhost:3000/api/companies
+Accept: application/json
+
+### Get Company List with Pagination
+GET http://localhost:3000/api/companies?limit=10&offset=0
+Accept: application/json
+
+### Get Company List - Page 2
+GET http://localhost:3000/api/companies?limit=10&offset=10
+Accept: application/json
+
+### Get Company Detail (replace with actual company name)
+# Note: Company names with spaces need URL encoding
+GET http://localhost:3000/api/companies/{{companyName}}
+Accept: application/json
+
+### Get Existing Shipments Endpoint (for reference)
+GET http://localhost:3000/api/shipments
+Accept: application/json

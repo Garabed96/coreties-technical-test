@@ -1,0 +1,63 @@
+GET http://localhost:3000/api/companies/stats
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/WebStorm 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2026-01-14T193313.404.html
+
+###
+
+GET http://localhost:3000/api/shipments
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/WebStorm 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2026-01-14T151740.200.json
+
+###
+
+GET http://localhost:3000/api/companies?limit=10&offset=0
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/WebStorm 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2026-01-14T151733.404.html
+
+###
+
+GET http://localhost:3000/api/companies/stats
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/WebStorm 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2026-01-14T151726.404.html
+
+###
+
+GET http://localhost:3000/api/companies?limit=10&offset=0
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/WebStorm 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2026-01-14T151710.404.html
+
+###
+
+GET http://localhost:3000/api/companies
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/WebStorm 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2026-01-14T151706.404.html
+
+###
+
+GET http://localhost:3000/api/companies/stats
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/WebStorm 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2026-01-14T151632.404.html
+
+###
+

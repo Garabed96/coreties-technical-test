@@ -1,0 +1,52 @@
+{
+  "name": "coreties-technical-test",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "prepare": "husky",
+    "docker-build": "docker build -t coreties-app .",
+    "docker-dev": "docker run -p 3000:3000 coreties-app"
+  },
+  "dependencies": {
+    "@duckdb/node-api": "^1.4.3-r.1",
+    "next": "16.0.10",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
+    "recharts": "^3.6.0",
+    "swr": "^2.3.8",
+    "zod": "^4.3.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "prettier": "^3.7.4",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "@vitejs/plugin-react": "^5.1.2",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.10",
+    "husky": "^9.1.7",
+    "node-mocks-http": "^1.17.2",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^4.0.17"
+  },
+  "lint-staged": {
+    "apps/web/**/*.{js,jsx,ts,tsx,mjs}": [
+      "prettier --write",
+      "eslint --fix --config apps/web/eslint.config.mjs"
+    ],
+    "*.{json,css,scss,md,html}": [
+      "prettier --write"
+    ]
+  }
+}

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1ff445d4-a6e0-434e-84c4-5e83e1a384e7" name="Changes" comment="mvp">
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.husky/pre-commit" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/coreties-technical-test-main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2026-01-14T151632.404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2026-01-14T151706.404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2026-01-14T151710.404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2026-01-14T151726.404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2026-01-14T151733.404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2026-01-14T151740.200.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2026-01-14T193313.404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DEVELOPER.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/__tests__/api/companies/[name].test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/__tests__/api/companies/index.test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/__tests__/api/companies/stats.test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/CompanyDetail.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Navigation.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/shipments.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/shipments.test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/shipments.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local-dev.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/_document.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/companies/[name].ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/companies/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/companies/stats.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/shipments.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/companies.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postcss.config.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/file.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/globe.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/next.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/vercel.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/window.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/styles/globals.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/company.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/shipment.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vitest.config.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="AISelfReview" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="38BeXhlleDX0LAijCYkCGNHWQDJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="sortByType" value="true" />
+    <option name="sortKey" value="BY_TYPE" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;HTTP Request.local-dev | Get Company Detail (replace with actual company name).executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.local-dev | Get Company List (Paginated).executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.local-dev | Get Company List with Pagination.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.local-dev | Get Dashboard Stats (Total Companies + Top Commodities + Monthly Volume).executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.local-dev | Get Existing Shipments Endpoint (for reference).executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/garonazarian/WebstormProjects/coreties-technical-test-main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/garonazarian/WebstormProjects/coreties-technical-test-main/node_modules/prettier&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/garonazarian/WebstormProjects/coreties-technical-test-main/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
+  }
+}</component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/__tests__/api/companies" />
+      <recent name="$PROJECT_DIR$/pages/api/__tests__" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Next.js: server-side">
+    <configuration name="local-dev | Get Company Detail (replace with actual company name)" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/local-dev.http" executionIdentifier="Get Company Detail (replace with actual company name)" index="5" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="local-dev | Get Company List (Paginated)" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/local-dev.http" executionIdentifier="Get Company List (Paginated)" index="2" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="local-dev | Get Company List with Pagination" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/local-dev.http" executionIdentifier="Get Company List with Pagination" index="3" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="local-dev | Get Dashboard Stats (Total Companies + Top Commodities + Monthly Volume)" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/local-dev.http" executionIdentifier="Get Dashboard Stats (Total Companies + Top Commodities + Monthly Volume)" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="local-dev | Get Existing Shipments Endpoint (for reference)" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/local-dev.http" executionIdentifier="Get Existing Shipments Endpoint (for reference)" index="6" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
+      <method v="2" />
+    </configuration>
+    <configuration name="Next.js: server-side" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.local-dev | Get Dashboard Stats (Total Companies + Top Commodities + Monthly Volume)" />
+        <item itemvalue="HTTP Request.local-dev | Get Existing Shipments Endpoint (for reference)" />
+        <item itemvalue="HTTP Request.local-dev | Get Company Detail (replace with actual company name)" />
+        <item itemvalue="HTTP Request.local-dev | Get Company List with Pagination" />
+        <item itemvalue="HTTP Request.local-dev | Get Company List (Paginated)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-WS-252.23892.411" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1ff445d4-a6e0-434e-84c4-5e83e1a384e7" name="Changes" comment="" />
+      <created>1768277433231</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1768277433231</updated>
+      <workItem from="1768277434379" duration="19000" />
+      <workItem from="1768277831075" duration="149000" />
+      <workItem from="1768277991738" duration="132000" />
+      <workItem from="1768278132208" duration="179000" />
+      <workItem from="1768278318615" duration="108000" />
+      <workItem from="1768278460404" duration="14000" />
+      <workItem from="1768278480544" duration="67000" />
+      <workItem from="1768278568894" duration="13000" />
+      <workItem from="1768278619672" duration="1329000" />
+      <workItem from="1768287853586" duration="737000" />
+      <workItem from="1768288609850" duration="30644000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="mvp" />
+    <option name="LAST_COMMIT_MESSAGE" value="mvp" />
+  </component>
+</project>
