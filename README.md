@@ -1,3 +1,38 @@
+# Coreties Technical Assessment - Garo Nazarian
+
+## Quick Links
+
+🔗 **Live Demo**: https://coreties-technical-test-production.up.railway.app/companies  
+📦 **GitHub**: https://github.com/Garabed96/coreties-technical-test  
+📸 **Screenshots**: https://github.com/Garabed96/coreties-technical-test/tree/main/screenshots
+
+---
+
+## Key Implementation Highlights
+
+### SQL Aggregations
+Used CTEs with UNION ALL to deduplicate companies across importer/exporter roles, with composite key `(name, country)` for accurate grouping.
+
+### Server-Side Pagination & Search
+20 companies per page with debounced search that filters across all records (not just current page).
+
+### Type Safety
+Zod schemas for runtime validation at API boundaries with type coercion for DuckDB numeric output.
+
+### API Design
+Separated `/api/companies/stats` endpoint to prevent unnecessary refetches during pagination.
+
+### Testing
+Vitest test suite covering happy paths, error cases, SQL logic, and security (SQL injection prevention).
+
+### Deployment
+Deployed on Railway with DuckDB native module support and sub-millisecond query performance on 5K records.
+
+---
+
+All checklist items complete. Development notes, design decisions, and architecture details documented in `DEVELOPER.md`.
+
+
 # Full-Stack Technical Assessment
 
 ## Quick Start
