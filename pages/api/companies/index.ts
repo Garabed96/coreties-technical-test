@@ -9,6 +9,7 @@ import { parsePositiveInt, MAX_LIMIT, DEFAULT_LIMIT } from '@/lib/utils/api';
  *
  * @query limit - Max companies to return (default: 100, max: 1000)
  * @query offset - Number to skip for pagination (default: 0)
+ * @query search - Optional search string to filter companies by name (case-insensitive)
  *
  * @returns - { data: CompanyListItem[], total: number } Success Response
  * @throws 405 - Method not allowed (non-GET requests)
@@ -26,8 +27,10 @@ export default async function handler(
   try {
     const limit = parsePositiveInt(req.query.limit, DEFAULT_LIMIT, MAX_LIMIT);
     const offset = parsePositiveInt(req.query.offset, 0);
+    const search =
+      typeof req.query.search === 'string' ? req.query.search : undefined;
 
-    const result = await getCompanies({ limit, offset });
+    const result = await getCompanies({ limit, offset, search });
     const validated = CompaniesResponseSchema.parse(result);
     res.status(200).json(validated);
   } catch (error) {

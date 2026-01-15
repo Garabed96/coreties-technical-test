@@ -4,18 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ff445d4-a6e0-434e-84c4-5e83e1a384e7" name="Changes" comment="- prettierrc &amp;&amp; precommit">
-      <change afterPath="$PROJECT_DIR$/lib/utils/api.ts" afterDir="false" />
+    <list default="true" id="1ff445d4-a6e0-434e-84c4-5e83e1a384e7" name="Changes" comment="Extract `parsePositiveInt` utility for query parameter parsing and integrate with `/api/shipments` and `/api/companies`.&#10;Implement tsdocs">
+      <change afterPath="$PROJECT_DIR$/screenshots/companies-failure-state.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screenshots/companies-loaded-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screenshots/companies-loaded-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screenshots/companies-loading-skeleton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screenshots/homepage-failure-state.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screenshots/homepage-loaded.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screenshots/homepage-loading-skeleton.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DEVELOPER.md" beforeDir="false" afterPath="$PROJECT_DIR$/DEVELOPER.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/data/shipments.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/shipments.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/companies/[name].ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/companies/[name].ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/api/companies/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/companies/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/companies/stats.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/companies/stats.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/shipments.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/shipments.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/companies.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/companies.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +116,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/screenshots" />
       <recent name="$PROJECT_DIR$/__tests__/api/companies" />
       <recent name="$PROJECT_DIR$/pages/api/__tests__" />
     </key>
@@ -182,7 +187,7 @@
       <workItem from="1768288609850" duration="30644000" />
       <workItem from="1768452904323" duration="30000" />
       <workItem from="1768452951957" duration="5978000" />
-      <workItem from="1768459022487" duration="6185000" />
+      <workItem from="1768459022487" duration="10321000" />
     </task>
     <task id="LOCAL-00001" summary="mvp">
       <option name="closed" value="true" />
@@ -200,7 +205,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768415652639</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Extract `parsePositiveInt` utility for query parameter parsing and integrate with `/api/shipments` and `/api/companies`.&#10;Implement tsdocs">
+      <option name="closed" value="true" />
+      <created>1768466756083</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1768466756083</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +233,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="mvp" />
     <MESSAGE value="- prettierrc &amp;&amp; precommit" />
-    <option name="LAST_COMMIT_MESSAGE" value="- prettierrc &amp;&amp; precommit" />
+    <MESSAGE value="Extract `parsePositiveInt` utility for query parameter parsing and integrate with `/api/shipments` and `/api/companies`.&#10;Implement tsdocs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Extract `parsePositiveInt` utility for query parameter parsing and integrate with `/api/shipments` and `/api/companies`.&#10;Implement tsdocs" />
   </component>
 </project>

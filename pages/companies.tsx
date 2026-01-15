@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import useSWR from 'swr';
+import { useDebounce } from 'use-debounce';
 import Navigation from '@/components/Navigation';
 import CompanyDetail from '@/components/CompanyDetail';
 import {
@@ -22,6 +23,7 @@ export default function CompaniesPage() {
   >(null);
   const [page, setPage] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedSearch] = useDebounce(searchQuery, 300);
 
   // Fetch dashboard stats
   const {
@@ -30,21 +32,18 @@ export default function CompaniesPage() {
     error: statsError,
   } = useSWR<StatsResponse>('/api/companies/stats', fetcher);
 
-  // Fetch company list with pagination
+  // Fetch company list with pagination and server-side search
   const {
     data: companiesData,
     isLoading: companiesLoading,
     error: companiesError,
   } = useSWR<CompaniesResponse>(
-    `/api/companies?limit=${PAGE_SIZE}&offset=${page * PAGE_SIZE}`,
+    `/api/companies?limit=${PAGE_SIZE}&offset=${page * PAGE_SIZE}${debouncedSearch ? `&search=${encodeURIComponent(debouncedSearch)}` : ''}`,
     fetcher
   );
 
-  // Filter companies by search query (client-side)
-  const filteredCompanies =
-    companiesData?.data?.filter(c =>
-      c.name.toLowerCase().includes(searchQuery.toLowerCase())
-    ) ?? [];
+  // Use data directly (server-side search)
+  const filteredCompanies = companiesData?.data ?? [];
 
   // Calculate pagination info
   const totalPages = Math.ceil((companiesData?.total ?? 0) / PAGE_SIZE);
@@ -208,10 +207,9 @@ export default function CompaniesPage() {
                       Company List
                     </h2>
                     <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-                      {companiesData?.total
-                        ? `${companiesData.total.toLocaleString()} companies`
+                      {companiesData?.total !== undefined
+                        ? `${companiesData.total.toLocaleString()} ${debouncedSearch ? 'matches' : 'companies'}`
                         : 'Loading...'}
-                      {searchQuery && ` · ${filteredCompanies.length} matches`}
                     </p>
                   </div>
                   <div className="relative">
@@ -367,7 +365,7 @@ export default function CompaniesPage() {
                       setPage(0);
                       setSelectedCompanyOverride(null);
                     }}
-                    disabled={!hasPrevPage || !!searchQuery}
+                    disabled={!hasPrevPage}
                     className="rounded-lg border border-zinc-300 px-3 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
                     title="First page"
                   >
@@ -378,7 +376,7 @@ export default function CompaniesPage() {
                       setPage(p => p - 1);
                       setSelectedCompanyOverride(null);
                     }}
-                    disabled={!hasPrevPage || !!searchQuery}
+                    disabled={!hasPrevPage}
                     className="rounded-lg border border-zinc-300 px-3 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
                     title="Previous page"
                   >
@@ -386,9 +384,7 @@ export default function CompaniesPage() {
                   </button>
                 </div>
                 <span className="text-sm text-zinc-600 dark:text-zinc-400">
-                  {searchQuery
-                    ? `${filteredCompanies.length} results`
-                    : `Page ${page + 1} of ${totalPages}`}
+                  Page {page + 1} of {totalPages || 1}
                 </span>
                 <div className="flex items-center gap-2">
                   <button
@@ -396,7 +392,7 @@ export default function CompaniesPage() {
                       setPage(p => p + 1);
                       setSelectedCompanyOverride(null);
                     }}
-                    disabled={!hasNextPage || !!searchQuery}
+                    disabled={!hasNextPage}
                     className="rounded-lg border border-zinc-300 px-3 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
                     title="Next page"
                   >
@@ -407,7 +403,7 @@ export default function CompaniesPage() {
                       setPage(totalPages - 1);
                       setSelectedCompanyOverride(null);
                     }}
-                    disabled={!hasNextPage || !!searchQuery}
+                    disabled={!hasNextPage}
                     className="rounded-lg border border-zinc-300 px-3 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
                     title="Last page"
                   >

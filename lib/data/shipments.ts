@@ -166,28 +166,39 @@ export async function getCompanyStats(): Promise<StatsResponse> {
  *
  * @param options.limit - Max companies to return (default: 100)
  * @param options.offset - Number of companies to skip for pagination (default: 0)
+ * @param options.search - Optional search string to filter companies by name (case-insensitive)
  * @returns Paginated company list with total count for pagination UI
  */
 export async function getCompanies(options?: {
   limit?: number;
   offset?: number;
+  search?: string;
 }): Promise<{ data: CompanyListItem[]; total: number }> {
   const limit = options?.limit ?? 100;
   const offset = options?.offset ?? 0;
+  const search = options?.search;
 
-  // Get total count of unique companies
+  // Build WHERE clause for search filtering
+  const searchClause = search
+    ? `WHERE name ILIKE '%${search.replace(/'/g, "''")}%'`
+    : '';
+
+  // Get total count of unique companies (with optional search filter)
   const countResult = await query<{ total: number }>(`
     SELECT COUNT(*) as total FROM (
-      SELECT DISTINCT name, country FROM (
-        SELECT importer_name as name, importer_country as country FROM shipments
-        UNION
-        SELECT exporter_name as name, exporter_country as country FROM shipments
+      SELECT name, country FROM (
+        SELECT DISTINCT name, country FROM (
+          SELECT importer_name as name, importer_country as country FROM shipments
+          UNION
+          SELECT exporter_name as name, exporter_country as country FROM shipments
+        )
       )
+      ${searchClause}
     )
   `);
   const total = countResult[0]?.total ?? 0;
 
-  // Get paginated company list
+  // Get paginated company list (with optional search filter)
   const data = await query<CompanyListItem>(`
     WITH importers AS (
       SELECT
@@ -206,18 +217,22 @@ export async function getCompanies(options?: {
         CAST(SUM(weight_metric_tonnes * 1000) AS INTEGER) as weight
       FROM shipments
       GROUP BY exporter_name, exporter_country
+    ),
+    combined AS (
+      SELECT
+        name,
+        country,
+        CAST(SUM(shipments) AS INTEGER) as totalShipments,
+        CAST(SUM(weight) AS INTEGER) as totalWeight
+      FROM (
+        SELECT * FROM importers
+        UNION ALL
+        SELECT * FROM exporters
+      ) all_companies
+      GROUP BY name, country
     )
-    SELECT
-      name,
-      country,
-      CAST(SUM(shipments) AS INTEGER) as totalShipments,
-      CAST(SUM(weight) AS INTEGER) as totalWeight
-    FROM (
-      SELECT * FROM importers
-      UNION ALL
-      SELECT * FROM exporters
-    ) combined
-    GROUP BY name, country
+    SELECT * FROM combined
+    ${searchClause}
     ORDER BY totalShipments DESC
     LIMIT ${limit} OFFSET ${offset}
   `);

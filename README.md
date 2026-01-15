@@ -78,3 +78,20 @@ DuckDB date functions: [duckdb.org/docs/sql/functions/date](https://duckdb.org/d
 ### Context
 
 [Coreties](https://www.coreties.com/) analyzes shipment customs data. A "shipment" = goods moving from an exporter (seller) to an importer (buyer) across countries.
+
+---
+
+## Screenshots
+
+### Homepage
+
+![Homepage - Loaded](screenshots/homepage-loaded.png)
+![Homepage - Loading Skeleton](screenshots/homepage-loading-skeleton.png)
+![Homepage - Failure State](screenshots/homepage-failure-state.png)
+
+### Companies Page
+
+![Companies - Loaded View 1](screenshots/companies-loaded-1.png)
+![Companies - Loaded View 2](screenshots/companies-loaded-2.png)
+![Companies - Loading Skeleton](screenshots/companies-loading-skeleton.png)
+![Companies - Failure State](screenshots/companies-failure-state.png)

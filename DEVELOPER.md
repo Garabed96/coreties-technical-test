@@ -9,7 +9,26 @@ npm run dev
 
 Open [http://localhost:3000/companies](http://localhost:3000/companies) to see the analytics dashboard.
 
+## Live Site
+
+Open [https://coreties-technical-test-production.up.railway.app/companies](https://coreties-technical-test-production.up.railway.app/companies)
+
 ---
+
+## Screenshots
+
+### Homepage
+
+![Homepage - Loaded](screenshots/homepage-loaded.png)
+![Homepage - Loading Skeleton](screenshots/homepage-loading-skeleton.png)
+![Homepage - Failure State](screenshots/homepage-failure-state.png)
+
+### Companies Page
+
+![Companies - Loaded View 1](screenshots/companies-loaded-1.png)
+![Companies - Loaded View 2](screenshots/companies-loaded-2.png)
+![Companies - Loading Skeleton](screenshots/companies-loading-skeleton.png)
+![Companies - Failure State](screenshots/companies-failure-state.png)
 
 ## Features in Action
 
@@ -22,12 +41,14 @@ The stats cards show aggregate counts across ~5,000 shipment records:
 
 ### Monthly Volume Chart
 
-Bar chart visualizing shipment weight aggregated by month. Uses `strftime()` to group dates and formats output as "MMM YYYY".
+Bar chart visualizing shipment weight aggregated by month. Uses `strftime()` to group dates and formats output as "MMM
+YYYY".
 
 ### Company List
 
 - Server-side pagination (20 per page) sorted by `totalShipments` DESC
-- Client-side search filters the current page without refetching
+- Server-side search with 300ms debounce - filters across all companies, not just current page
+- Pagination works during search (can navigate through filtered results)
 - Click any row to load company details
 
 ### Company Detail Panel
@@ -50,7 +71,8 @@ pages/*.tsx ← useSWR (client-side caching)
 
 **Data Flow:** JSON file → DuckDB table (created once) → SQL queries → API responses → SWR cache → React components
 
-**Why DuckDB?** Columnar storage with fast aggregations. The in-memory instance handles complex GROUP BY queries on 5K records in sub-millisecond time without external database setup.
+**Why DuckDB?** Columnar storage with fast aggregations. The in-memory instance handles complex GROUP BY queries on 5K
+records in sub-millisecond time without external database setup.
 
 ---
 
@@ -61,14 +83,14 @@ pages/*.tsx ← useSWR (client-side caching)
 **CTE + UNION ALL for company deduplication:**
 
 ```sql
-WITH importers AS (
-  SELECT importer_name AS name, importer_country AS country, ...
-  FROM shipments
-),
-exporters AS (
-  SELECT exporter_name AS name, exporter_country AS country, ...
-  FROM shipments
-)
+WITH importers AS (SELECT importer_name AS name, importer_country AS country,
+    ...
+    FROM shipments
+    )
+   , exporters AS (
+SELECT exporter_name AS name, exporter_country AS country, ...
+    FROM shipments
+    )
 SELECT name, country, SUM(shipments), SUM(weight)
 FROM (SELECT * FROM importers UNION ALL SELECT * FROM exporters)
 GROUP BY name, country
@@ -76,21 +98,26 @@ GROUP BY name, country
 
 This pattern merges a company's activity from both roles into a single aggregated row.
 
-**Composite key `(name, country)`:** The same company name can exist in different countries. Keying by the tuple ensures accurate deduplication.
+**Composite key `(name, country)`:** The same company name can exist in different countries. Keying by the tuple ensures
+accurate deduplication.
 
 **Weight conversion:** Source data uses metric tonnes. Queries multiply by 1000 and cast to integer for clean kg values.
 
 ### API Design
 
-**Separated stats endpoint:** `/api/companies/stats` is independent from `/api/companies`. Stats don't refetch when paginating the company list.
+**Separated stats endpoint:** `/api/companies/stats` is independent from `/api/companies`. Stats don't refetch when
+paginating the company list.
 
-**N+1 prevention:** `getCompanyDetail()` runs 3 queries in sequence (stats, partners, commodities) rather than one query per trading partner. Application code aggregates the results.
+**N+1 prevention:** `getCompanyDetail()` runs 3 queries in sequence (stats, partners, commodities) rather than one query
+per trading partner. Application code aggregates the results.
 
-**Zod coercion:** DuckDB returns numbers as strings in JSON. Schemas use `z.coerce.number()` to convert at the API boundary.
+**Zod coercion:** DuckDB returns numbers as strings in JSON. Schemas use `z.coerce.number()` to convert at the API
+boundary.
 
 ### Domain Modeling
 
-**Runtime role derivation:** The `role` field (`importer` | `exporter` | `both`) is computed from query results, not stored. A company's role reflects its current data, not a fixed label.
+**Runtime role derivation:** The `role` field (`importer` | `exporter` | `both`) is computed from query results, not
+stored. A company's role reflects its current data, not a fixed label.
 
 **Type hierarchy:**
 
@@ -99,9 +126,9 @@ This pattern merges a company's activity from both roles into a single aggregate
 
 ### Frontend Architecture
 
-**SWR cache keys:** Pagination params are part of the cache key, so each page is cached independently. Navigating back to a page hits cache.
+**SWR cache keys:** Pagination and search params are part of the cache key, so each page/search combination is cached independently.
 
-**Search vs pagination tradeoff:** Search filters client-side (instant feedback). Pagination is server-side (handles full dataset). Search disables pagination to avoid confusing UX.
+**Server-side search:** Search uses SQL `ILIKE` with 300ms debounce. Pagination works during search, allowing navigation through filtered results.
 
 ---
 
@@ -136,3 +163,17 @@ Tests run against a real DuckDB instance to verify actual SQL behavior.
 | `types/company.ts`              | Zod schemas and TypeScript types                     |
 | `lib/data/shipments.test.ts`    | Data layer tests                                     |
 | `__tests__/api/companies/`      | API endpoint tests                                   |
+
+### Known Limitations
+
+- **No fuzzy search**: Search uses SQL `ILIKE` substring matching. No typo tolerance or relevance ranking.
+- **No HTTP caching headers**: APIs always return fresh data. Could add `Cache-Control` for production.
+- **Duplicate aggregation**: Count query and data query run the same CTE twice. Could optimize with window functions.
+- **Manual SQL escaping**: Uses string replacement instead of parameterized queries. Works for single-param lookups but doesn't scale.
+
+### What I'd Change for Production
+
+- Add Redis or query-level caching for repeated aggregations
+- Use parameterized queries or an ORM for SQL safety
+- Add response caching headers (`ETag`, `Cache-Control`)
+- Add full-text search with fuzzy matching (e.g., pg_trgm or Elasticsearch)
