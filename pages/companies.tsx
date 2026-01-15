@@ -136,7 +136,11 @@ export default function CompaniesPage() {
                         </span>
                       </div>
                       <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                        {(item.kg / 1000).toFixed(0)}k kg
+                        {new Intl.NumberFormat('en-US', {
+                          notation: 'compact',
+                          compactDisplay: 'short',
+                        }).format(item.kg)}{' '}
+                        kg
                       </span>
                     </div>
                   ))}

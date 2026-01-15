@@ -1,25 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { loadShipments } from '@/lib/data/shipments';
 import { Shipment } from '@/types/shipment';
+import { parsePositiveInt, MAX_LIMIT, DEFAULT_LIMIT } from '@/lib/utils/api';
 
-const MAX_LIMIT = 1000;
-const DEFAULT_LIMIT = 100;
-
-function parsePositiveInt(
-  value: unknown,
-  defaultValue: number,
-  max?: number
-): number {
-  const parsed = parseInt(value as string, 10);
-  if (isNaN(parsed) || parsed < 0) {
-    return defaultValue;
-  }
-  if (max !== undefined && parsed > max) {
-    return max;
-  }
-  return parsed;
-}
-
+/**
+ * GET /api/shipments - Paginated list of raw shipment records.
+ *
+ * @query limit - Max shipments to return (default: 100, max: 1000)
+ * @query offset - Number to skip for pagination (default: 0)
+ *
+ * @returns - { data: Shipment[], total: number } Success Response
+ * @throws 405 - Method not allowed
+ * @throws 500 - Server error
+ */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<{ data: Shipment[]; total: number } | { error: string }>

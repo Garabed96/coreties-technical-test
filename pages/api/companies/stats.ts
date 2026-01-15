@@ -3,6 +3,16 @@ import { ZodError } from 'zod';
 import { getCompanyStats } from '@/lib/data/shipments';
 import { StatsResponse, StatsResponseSchema } from '@/types/company';
 
+/**
+ * GET /api/companies/stats - Dashboard statistics.
+ *
+ * Returns aggregate counts and top commodities for dashboard cards/charts.
+ * Separate from /api/companies to avoid refetching stats on pagination.
+ *
+ * @returns - { StatsResponse (importers, exporters, commodities, monthly volume) } Success Response
+ * @throws 405 - Method not allowed
+ * @throws 500 - Server error
+ */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<StatsResponse | { error: string }>

@@ -3,6 +3,17 @@ import { ZodError } from 'zod';
 import { getCompanyDetail } from '@/lib/data/shipments';
 import { CompanyDetail, CompanyDetailSchema } from '@/types/company';
 
+/**
+ * GET /api/companies/[name] - Detailed info for a specific company.
+ *
+ * @param name - URL-encoded company name (required)
+ *
+ * @returns - { CompanyDetail object Success Response } Success Response
+ * @throws 400 - Missing or invalid name parameter
+ * @throws 404 - Company not found
+ * @throws 405 - Method not allowed
+ * @throws 500 - Server error
+ */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<CompanyDetail | { error: string }>

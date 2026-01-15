@@ -22,7 +22,14 @@ async function getInstance(): Promise<DuckDBInstance> {
 }
 
 /**
- * Loads shipment data with pagination.
+ * Returns raw shipment records with pagination support.
+ *
+ * Used by the /api/shipments endpoint to display the base shipment data.
+ * Results are ordered by shipment_date DESC (most recent first).
+ *
+ * @param options.limit - Max shipments to return (default: 100)
+ * @param options.offset - Number of shipments to skip for pagination (default: 0)
+ * @returns Paginated shipment list with total count for pagination UI
  */
 export async function loadShipments(options?: {
   limit?: number;
@@ -46,8 +53,15 @@ export async function loadShipments(options?: {
 }
 
 /**
- * Transform shipment data into company-level aggregates.
- * Merges companies that appear as both importer and exporter into single entities.
+ * Transforms raw shipment records into company-level aggregates (unpaginated).
+ *
+ * Similar to getCompanies() but returns ALL companies without pagination.
+ * Used primarily for testing to verify the CTE + UNION ALL aggregation logic.
+ *
+ * Companies appearing as both importer and exporter are merged into single rows
+ * with combined totalShipments and totalWeight across both roles.
+ *
+ * @returns All companies sorted by totalShipments DESC
  */
 export async function transformShipmentsToCompanies(): Promise<
   CompanyListItem[]
@@ -87,7 +101,17 @@ export async function transformShipmentsToCompanies(): Promise<
 }
 
 /**
- * Get dashboard statistics: company counts, top commodities, and monthly volume.
+ * Returns aggregated statistics for the dashboard cards and chart.
+ *
+ * Fetches three independent metrics in parallel-safe queries:
+ * - **totalImporters/totalExporters**: COUNT(DISTINCT) on name columns
+ * - **topCommodities**: Top 5 commodities ranked by total weight (kg)
+ * - **monthlyVolume**: Shipment weight aggregated by month for the bar chart
+ *
+ * Note: A company can be counted in BOTH totalImporters and totalExporters
+ * if it appears in both roles—these are not mutually exclusive counts.
+ *
+ * @returns Dashboard stats object matching StatsResponse schema
  */
 export async function getCompanyStats(): Promise<StatsResponse> {
   // Get company counts
@@ -131,7 +155,18 @@ export async function getCompanyStats(): Promise<StatsResponse> {
 }
 
 /**
- * Get paginated list of companies with their shipment stats.
+ * Returns a paginated list of companies with aggregated shipment statistics.
+ *
+ * Companies can appear as both importers and exporters in the shipments data.
+ * This function uses CTE + UNION ALL to merge both roles, then GROUP BY (name, country)
+ * to deduplicate and sum totals across roles. A company that imported 10 shipments
+ * and exported 5 will show totalShipments: 15.
+ *
+ * Results are sorted by totalShipments DESC (most active companies first).
+ *
+ * @param options.limit - Max companies to return (default: 100)
+ * @param options.offset - Number of companies to skip for pagination (default: 0)
+ * @returns Paginated company list with total count for pagination UI
  */
 export async function getCompanies(options?: {
   limit?: number;
@@ -191,8 +226,22 @@ export async function getCompanies(options?: {
 }
 
 /**
- * Get detailed information for a specific company.
- * Optimized to use 3 queries instead of 5 (N+1 prevention).
+ * Returns detailed information for a specific company by name.
+ *
+ * Uses 3 optimized queries instead of N+1 pattern:
+ * 1. **Company stats** - UNION of importer and exporter roles to get totals
+ * 2. **Trading partners** - Top 5 companies this company trades with (both directions)
+ * 3. **Top commodities** - Top 5 commodities by weight for this company
+ *
+ * The `role` field is derived at runtime from query results:
+ * - 'importer' if only appears as importer
+ * - 'exporter' if only appears as exporter
+ * - 'both' if appears in both roles
+ *
+ * SQL injection is prevented by escaping single quotes in the company name.
+ *
+ * @param companyName - The exact company name to look up
+ * @returns CompanyDetail object, or null if company not found
  */
 export async function getCompanyDetail(
   companyName: string
@@ -302,12 +351,17 @@ export async function getCompanyDetail(
 }
 
 /**
- * Initializes the `shipments` table from JSON data.
- * This is called automatically before queries, so you can simply write:
+ * Initializes the DuckDB `shipments` table from the JSON data file.
  *
- * ```sql
- * SELECT * FROM shipments
- * ```
+ * Called automatically before each query—you don't need to call this directly.
+ * Uses DuckDB's `read_json_auto()` for zero-config JSON ingestion.
+ *
+ * Also creates indexes on frequently-filtered columns for query performance:
+ * - `idx_importer_name` - Used by company detail and aggregation queries
+ * - `idx_exporter_name` - Used by company detail and aggregation queries
+ * - `idx_shipment_date` - Used by date ordering and monthly aggregation
+ *
+ * Initialization is idempotent—subsequent calls are no-ops.
  */
 async function ensureTableInitialized(): Promise<void> {
   if (tableInitialized) return;
